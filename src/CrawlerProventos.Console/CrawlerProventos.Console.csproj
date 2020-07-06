@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\CrawlerProventos.Core\CrawlerProventos.Core.csproj" />
-    <ProjectReference Include="..\src\CrawlerProventos.Infrastructure\CrawlerProventos.Infrastructure.csproj" />
+    <ProjectReference Include="..\CrawlerProventos.Core\CrawlerProventos.Core.csproj" />
+    <ProjectReference Include="..\CrawlerProventos.Infrastructure\CrawlerProventos.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

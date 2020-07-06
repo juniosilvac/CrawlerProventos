@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrawlerProventos.Core", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrawlerProventos.Infrastructure", "src\CrawlerProventos.Infrastructure\CrawlerProventos.Infrastructure.csproj", "{D3E97F12-C07C-45A7-AE0A-6E21B4517367}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrawlerProventos.Console", "CrawlerProventos.Console\CrawlerProventos.Console.csproj", "{3C4E336D-291D-4D90-96F5-CC8416F06474}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrawlerProventos.Console", "src\CrawlerProventos.Console\CrawlerProventos.Console.csproj", "{3C4E336D-291D-4D90-96F5-CC8416F06474}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
