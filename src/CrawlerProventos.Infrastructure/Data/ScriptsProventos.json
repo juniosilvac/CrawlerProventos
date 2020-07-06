@@ -1,0 +1,85 @@
+-- ## TipoAtivo ## --
+CREATE TABLE TipoAtivo (
+	id int not null auto_increment,
+	sigla varchar(100) not null,
+	descricao varchar (200) not null,
+	primary key  (id)
+);
+
+INSERT INTO TipoAtivo (sigla, descricao) VALUES ('ON', 'Ações ordinárias');
+INSERT INTO TipoAtivo (sigla, descricao) VALUES ('PN', 'Ações preferenciais');
+
+-- ## TipoProvento ## --
+CREATE TABLE TipoProvento (
+	id int not null auto_increment,
+	sigla varchar(100) not null,
+	descricao varchar (200) not null,
+	primary key  (id)
+);
+
+INSERT INTO TipoProvento (sigla, descricao) VALUES ('DIVIDENDO', 'Lucros de uma empresa que ela pretende distribuir aos acionistas do negócio');
+INSERT INTO TipoProvento (sigla, descricao) VALUES ('JRS CAP PROPRIO', 'Juros sobre capital próprio');
+INSERT INTO TipoProvento (sigla, descricao) VALUES ('BONIFICAÇÃO', 'Empresa decide incorporar parte do lucro em reservas no seu capital social');
+INSERT INTO TipoProvento (sigla, descricao) VALUES ('DIREITOS DE SUBSCRIÇÃO', 'A empresa confere aos seus acionistas o direito de adquirir novas ações emitidas pela companhia');
+
+-- ## CotacaoPorLoteMil ## --
+CREATE TABLE CotacaoPorLoteMil (
+	id binary(36) primary key not null,
+	ultimoDia date null,
+	ultimoDiaPreco date null,
+	ultimoPreco decimal(15,2) null,
+	precoPorUnidade int null	
+);
+
+INSERT INTO CotacaoPorLoteMil (id, ultimoDia, ultimoDiaPreco, ultimoPreco, precoPorUnidade) VALUES (UUID(),DATE('2008-08-25'), DATE('2008-08-25'), 11.21, 1);
+INSERT INTO CotacaoPorLoteMil (id, ultimoDia, ultimoDiaPreco, ultimoPreco, precoPorUnidade) VALUES (UUID(),DATE('2008-08-20'), DATE('2008-08-25'), 12.21, 1);
+INSERT INTO CotacaoPorLoteMil (id, ultimoDia, ultimoDiaPreco, ultimoPreco, precoPorUnidade) VALUES (UUID(),DATE('2009-08-25'), DATE('2008-08-25'), 13.22, 1);
+INSERT INTO CotacaoPorLoteMil (id, ultimoDia, ultimoDiaPreco, ultimoPreco, precoPorUnidade) VALUES (UUID(),DATE('2010-08-25'), DATE('2008-08-25'), 15.21, 1);
+
+-- ## Provento ## --
+CREATE TABLE Provento (
+	id binary(36) primary key not null,
+	tipoAtivoId int not null,
+	tipoProventoId int not null,
+	cotacaoPorLoteMilId binary(36),
+	aprovacao date null,
+	valor decimal(15,14) null,
+	preco decimal(15,14) null,
+	proventoPorUnidade int null,
+	
+	foreign key(tipoAtivoId)
+	references TipoAtivo (id),
+	
+	foreign key(tipoProventoId)
+	references TipoProvento (id),
+	
+	foreign key(cotacaoPorLoteMilId)
+	references CotacaoPorLoteMil (id)	
+);
+
+INSERT INTO Provento (id, tipoAtivoId, tipoProventoId, cotacaoPorLoteMilId, aprovacao, valor, preco, proventoPorUnidade) 
+	VALUES (UUID(), 1, 1,'07c55814-ba69-11ea-8ed3-b8ac6fc4ab77', '2008-08-14', 0.072995, 0.651160, 1);	
+	
+INSERT INTO Provento (id, tipoAtivoId, tipoProventoId, cotacaoPorLoteMilId, aprovacao, valor, preco, proventoPorUnidade) 
+	VALUES (UUID(), 1, 2,'07c55814-ba69-11ea-8ed3-b8ac6fc4ab77', '2009-10-15', 0.0954195, 0.8874551160, 1);	
+	
+INSERT INTO Provento (id, tipoAtivoId, tipoProventoId, cotacaoPorLoteMilId, aprovacao, valor, preco, proventoPorUnidade) 
+	VALUES (UUID(), 2, 1,'07c8a6a0-ba69-11ea-8ed3-b8ac6fc4ab77', '2010-07-16', 0.08475145, 0.633254760, 1);	
+	
+INSERT INTO Provento (id, tipoAtivoId, tipoProventoId, cotacaoPorLoteMilId, aprovacao, valor, preco, proventoPorUnidade) 
+	VALUES (UUID(), 2, 2,'07ca9420-ba69-11ea-8ed3-b8ac6fc4ab77', '2008-05-17', 0.88774499, 0.9654127, 1);	
+	
+INSERT INTO Provento (id, tipoAtivoId, tipoProventoId, cotacaoPorLoteMilId, aprovacao, valor, preco, proventoPorUnidade) 
+	VALUES (UUID(), 1, 2,'eae8f298-ba68-11ea-8ed3-b8ac6fc4ab77', '2008-09-18', 0.98574, 0.33658877, 1);
+
+-- ## Usuario ## --	
+CREATE TABLE Usuario (
+	id int not null auto_increment,
+	login varchar(80) not null,
+	senha varchar(50) not null,
+	primary key (id),
+	unique (login)
+);
+
+INSERT INTO Usuario (login, senha) VALUES ('app.user', 'wA6Sg-{T2@X5z5.#');
+
