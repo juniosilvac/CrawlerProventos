@@ -33,8 +33,17 @@ namespace CrawlerProventos.Infrastructure.Repositories
 
         public async Task DeleteAllAsync()
         {
-            _context.ExecuteCommand("DELETE FROM provento");
-            _context.ExecuteCommand("DELETE FROM cotacaoporlotemil");
+            //_context.ExecuteCommand("DELETE FROM provento");
+            //_context.ExecuteCommand("DELETE FROM cotacaoporlotemil");
+
+            var proventos = await _context.Set<Provento>().ToListAsync();
+            _context.Set<Provento>().RemoveRange(proventos);
+
+            await _context.SaveChangesAsync();
+
+            var cotacoes = await _context.Set<CotacaoPorLoteMil>().ToListAsync();
+            _context.Set<CotacaoPorLoteMil>().RemoveRange(cotacoes);          
+
             await _context.SaveChangesAsync();
         }
 

@@ -35,7 +35,8 @@ namespace CrawlerProventos.Console
                     //Infrastructure
                     services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
                     services.AddDbContext<AppDbContext>(options =>
-                        options.UseMySql(AppConfig.MySqlConnectionString)
+                        options.UseMySql(AppConfig.MySqlConnectionString,
+                        options => options.EnableRetryOnFailure())
                     );
 
                     //Services

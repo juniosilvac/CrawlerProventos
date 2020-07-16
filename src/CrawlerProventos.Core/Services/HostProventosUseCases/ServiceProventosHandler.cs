@@ -34,8 +34,9 @@ namespace CrawlerProventos.Core.Services.CrawlerProventosUseCases
         {
             try
             {
-                _logger.LogInformation("O serviço está trabalhando.");
-                var proventosRequest = _mediator.Send(new ObterProventosRequest());
+                _logger.LogInformation("--- O serviço está trabalhando. ---\n\n\n");
+                _logger.LogInformation("O serviço está realizando a busca dos proventos.");
+                var proventosRequest = _mediator.Send(new ObterProventosRequest());               
 
                 if (proventosRequest.Result.HasError)
                 {
@@ -43,9 +44,12 @@ namespace CrawlerProventos.Core.Services.CrawlerProventosUseCases
                 }
                 else
                 {
+                    _logger.LogInformation("Removendo os registros de Cotação e Proventos.");
                     var proventosDeletados = _mediator.Send(new DeletarProventosRequest());
+                   
                     if (proventosDeletados.Result.Data)
                     {
+                        _logger.LogInformation("Inserindo novos registros de Cotação e Proventos.");
                         var criarProventos = _mediator.Send(new CriarProventosRequest()
                         {
                             proventos = proventosRequest.Result.Data
